@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
       # All Vagrant configuration is done here. The most common configuration
       # options are documented and commented below. For a complete reference,
       # please see the online documentation at vagrantup.com.
-      master_config.vm.hostname = "puppet.grahamgilbert.dev"
+      master_config.vm.hostname = "puppet.sherwin.com"
+
       # Every Vagrant virtual environment requires a box to build off of.
       master_config.vm.box = "precise64"
     
@@ -27,7 +28,7 @@ Vagrant.configure("2") do |config|
       # via the IP. Host-only networks can talk to the host machine as well as
       # any other machines on the same network, but cannot be accessed (through this
       # network interface) by any external networks.
-      master_config.vm.network :private_network, ip: "192.168.33.10"
+      master_config.vm.network :private_network, ip: "192.168.80.100"
         
       # Share an additional folder to the guest VM. The first argument is
       # an identifier, the second is the path on the guest to mount the
@@ -39,7 +40,7 @@ Vagrant.configure("2") do |config|
       master_config.vm.provision :puppet do |puppet|
         puppet.manifests_path = "VagrantConf/manifests"
         puppet.manifest_file  = "default.pp"
-        puppet.options        = "--verbose --modulepath /home/vagrant/modules"
+        puppet.options        = "--verbose --debug --modulepath /home/vagrant/modules"
       end 
 
     master_config.vm.synced_folder "puppet/manifests", "/etc/puppet/manifests"
